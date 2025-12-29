@@ -28,7 +28,7 @@ from . import client
 from . import conn
 from . import gimbal
 from . import chassis
-from . import camera
+# from . import camera
 from . import blaster
 from . import vision
 from . import servo
@@ -52,7 +52,7 @@ __all__ = ['Robot', 'RobotPlaySoundAction', 'Drone', 'FREE', 'GIMBAL_LEAD', 'CHA
 MODULE_CHASSIS = 'chassis'
 MODULE_GIMBAL = 'gimbal'
 MODULE_LED = 'led'
-MODULE_CAMERA = 'camera'
+# MODULE_CAMERA = 'camera'
 MODULE_BATTERY = 'battery'
 MODULE_GRIPPER = 'gripper'
 MODULE_VISION = 'vision'
@@ -378,9 +378,9 @@ class Drone(RobotBase):
     def battery(self):
         return self.get_module("TelloBattery")
 
-    @property
-    def camera(self):
-        return self.get_module("TelloCamera")
+    # @property
+    # def camera(self):
+        # return self.get_module("TelloCamera")
 
     @property
     def dds(self):
@@ -403,7 +403,7 @@ class Drone(RobotBase):
 
     def _scan_modules(self):
         _flight = flight.Flight(self)
-        _camera = camera.TelloCamera(self)
+        # _camera = camera.TelloCamera(self)
         _battery = battery.TelloBattery(self)
         _ai_module = ai_module.TelloAI(self)
         _dds = dds.TelloSubscriber(self)
@@ -416,7 +416,7 @@ class Drone(RobotBase):
         _dds.add_subject_info(self._status_sub, None, None, None)
 
         self._modules[_flight.__class__.__name__] = _flight
-        self._modules[_camera.__class__.__name__] = _camera
+        # self._modules[_camera.__class__.__name__] = _camera
         self._modules[_battery.__class__.__name__] = _battery
         self._modules[_ai_module.__class__.__name__] = _ai_module
         self._modules[_dds.__class__.__name__] = _dds
@@ -1194,10 +1194,10 @@ class Robot(RobotBase):
         """ 获取电池模块对象 """
         return self.get_module("Battery")
 
-    @property
-    def camera(self):
-        """ 获取相机模块对象 """
-        return self.get_module("EPCamera")
+    # @property
+    # def camera(self):
+        # """ 获取相机模块对象 """
+        # return self.get_module("EPCamera")
 
     @property
     def robotic_arm(self):
@@ -1243,7 +1243,7 @@ class Robot(RobotBase):
     def _scan_modules(self):
         _gimbal = gimbal.Gimbal(self)
         _chassis = chassis.Chassis(self)
-        _camera = camera.EPCamera(self)
+        # _camera = camera.EPCamera(self)
         _blaster = blaster.Blaster(self)
         _vision = vision.Vision(self)
         _dds = dds.Subscriber(self)
@@ -1262,7 +1262,7 @@ class Robot(RobotBase):
 
         self._modules[_gimbal.__class__.__name__] = _gimbal
         self._modules[_chassis.__class__.__name__] = _chassis
-        self._modules[_camera.__class__.__name__] = _camera
+        # self._modules[_camera.__class__.__name__] = _camera
         self._modules[_blaster.__class__.__name__] = _blaster
         self._modules[_vision.__class__.__name__] = _vision
         self._modules[_dds.__class__.__name__] = _dds
@@ -1280,7 +1280,7 @@ class Robot(RobotBase):
     def get_module(self, name):
         """ 获取模块对象
 
-        :param name: 模块名称，字符串，如：chassis, gimbal, led, blaster, camera, battery, vision, etc.
+        :param name: 模块名称，字符串，如：chassis, gimbal, led, blaster, battery, vision, etc.
         :return: 模块对象
         """
         return self._modules[name]
